@@ -8,6 +8,7 @@ echo "
 | |\  |  __/| |  | |
 |_| \_|_|   |_|  |_|
 -------------------------------------
+Version:  $(jq -r .version /app/package.json)
 Date:     $(date)
 User:     $(whoami)
 PUID:     $PUID
