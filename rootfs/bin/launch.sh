@@ -16,8 +16,7 @@ Group ID: $(id -g)
 -------------------------------------
 "
 
-if ! nginx -t > /dev/null 2>&1; then
-    nginx -T
+if ! nginx -tq; then
     sleep inf
 fi
 
