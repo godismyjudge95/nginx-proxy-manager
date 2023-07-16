@@ -121,7 +121,7 @@ const internalNginx = {
 					const ngxPID = fs.readFileSync(NgxPidFilePath, 'utf8').trim();
 					if (ngxPID.length > 0) {
 						logger.info('Stopping Nginx');
-						utils.exec(`nginx -s stop`);
+						utils.exec('nginx -s stop');
 					}
 				}
 				logger.info('Starting Nginx in five seconds');
