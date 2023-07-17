@@ -30,7 +30,6 @@ module.exports = {
 	execfg: function (cmd) {
 		return new Promise((resolve, reject) => {
 			const childProcess = spawn(cmd, {
-				shell:    true,
 				detached: true,
 				stdio:    'inherit' // Use the same stdio as the current process
 			});
