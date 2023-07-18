@@ -55,7 +55,7 @@ RUN apk add --no-cache ca-certificates git build-base && \
 
 FROM zoeyvid/nginx-quic:176
 COPY rootfs /
-RUN apk add --no-cache ca-certificates tzdata \
+RUN apk add --no-cache ca-certificates tzdata tini \
     lua5.1-lzlib \
     nodejs-current \
     openssl apache2-utils \
@@ -119,5 +119,5 @@ ENV NODE_ENV=production \
     DB_SQLITE_FILE=/data/etc/npm/database.sqlite
 
 WORKDIR /app
-ENTRYPOINT ["start.sh"]
+ENTRYPOINT ["tini", "--", "start.sh"]
 HEALTHCHECK CMD healthcheck.sh
