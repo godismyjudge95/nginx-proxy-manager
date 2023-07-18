@@ -117,8 +117,17 @@ const internalNginx = {
 	reload: () => {
 		return internalNginx.test()
 			.then(() => {
-				logger.info('Reloading Nginx');
-				return utils.exec('/usr/sbin/nginx -s reload');
+				if (fs.existsSync(NgxPidFilePath)) {
+					const ngxPID = fs.readFileSync(NgxPidFilePath, 'utf8').trim();
+					if (ngxPID.length > 0) {
+						logger.info('Reloading NGINX');
+						utils.exec('nginx -s reload');
+						return;
+					}
+				}
+				
+				logger.info('Starting NGINX');
+				utils.execfg('nginx');
 			});
 	},
 
