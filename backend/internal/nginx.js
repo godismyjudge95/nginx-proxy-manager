@@ -117,17 +117,8 @@ const internalNginx = {
 	reload: () => {
 		return internalNginx.test()
 			.then(() => {
-				if (fs.existsSync(NgxPidFilePath)) {
-					const ngxPID = fs.readFileSync(NgxPidFilePath, 'utf8').trim();
-					if (ngxPID.length > 0) {
-						logger.info('Stopping Nginx');
-						utils.exec('nginx -s stop');
-					}
-				}
-				logger.info('Starting Nginx in five seconds');
-				setTimeout(() => {
-					utils.execfg('nginx -e stderr');
-				}, 5000);
+				logger.info('Reloading Nginx');
+				return utils.exec('/usr/sbin/nginx -s reload');
 			});
 	},
 
