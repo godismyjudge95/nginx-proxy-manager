@@ -546,6 +546,8 @@ fi
 
 if [ ! -f /data/etc/crowdsec/crowdsec.conf ]; then
     cp -vn /usr/local/nginx/conf/conf.d/include/crowdsec.conf /data/etc/crowdsec/crowdsec.conf
+else
+    sed -i "s|crowdsec.conf|captcha.html|g" /data/etc/crowdsec/crowdsec.conf
 fi
 
 if grep -Eiq "ENABLED.*=.*true" /data/etc/crowdsec/crowdsec.conf; then
