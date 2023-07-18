@@ -73,10 +73,6 @@ RUN apk add --no-cache ca-certificates tzdata \
     echo "Include /usr/local/nginx/conf/conf.d/include/coreruleset/rules/*.conf" | tee -a /usr/local/nginx/conf/conf.d/include/modsecurity-crs.conf && \
     echo "#Include /usr/local/nginx/conf/conf.d/include/coreruleset/plugins/*-after.conf" | tee -a /usr/local/nginx/conf/conf.d/include/modsecurity-crs.conf && \
     git clone https://github.com/coreruleset/coreruleset /tmp/coreruleset && \
-    wget https://patch-diff.githubusercontent.com/raw/coreruleset/coreruleset/pull/3218.patch -O /tmp/coreruleset/http3.patch && \
-    cd /tmp/coreruleset && \
-    git apply /tmp/coreruleset/http3.patch && \
-    cd / && \
     mkdir /usr/local/nginx/conf/conf.d/include/coreruleset && \
     cp /tmp/coreruleset/crs-setup.conf.example /usr/local/nginx/conf/conf.d/include/coreruleset/crs-setup.conf.example && \
     sed -i '/#/!d' /usr/local/nginx/conf/conf.d/include/coreruleset/crs-setup.conf.example && \
