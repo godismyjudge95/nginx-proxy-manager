@@ -338,14 +338,14 @@ touch /data/etc/html/index.html \
       /data/nginx/custom/server_stream_udp.conf
 
 cp -vn /usr/local/nginx/conf/conf.d/include/coreruleset/crs-setup.conf.example /data/etc/modsecurity/crs-setup.conf
-cp -v /usr/local/nginx/conf/conf.d/include/coreruleset/crs-setup.conf.example /data/etc/modsecurity/crs-setup.conf.example
+cp /usr/local/nginx/conf/conf.d/include/coreruleset/crs-setup.conf.example /data/etc/modsecurity/crs-setup.conf.example
 
 if [ -z "$NPM_CERT_ID" ]; then
     export NPM_CERT=/data/tls/dummycert.pem
     export NPM_KEY=/data/tls/dummykey.pem
     echo "no NPM_CERT_ID set, using dummycerts for npm and default hosts."
 else
-    if ! echo "$NPM_CERT_ID" | grep -q "[0-9]"; then
+    if ! echo "$NPM_CERT_ID" | grep -q "^[0-9]\+$"; then
         echo "NPM_CERT_ID is a non allowed value."
         echo "It needs to be a number."
         echo "It is set to \"$NPM_CERT_ID\"."
